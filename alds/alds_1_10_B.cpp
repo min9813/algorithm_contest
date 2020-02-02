@@ -1,46 +1,29 @@
 #include<iostream>
-#include<string>
-#include<algorithm>
 using namespace std;
 
-static const int N = 1000;
-
-int lcs(string X, string Y){
-    int m = X.size();
-    int n = Y.size();
-    int i,j,maxl=0;
-    int dp[N+1][N+1];
-    for(i=0;i<m+1;i++){
-        dp[i][0] = 0;
-    }
-    for(j=0;j<n+1;j++){
-        dp[0][j] = 0;
-    }
-    for(i=1;i<m+1;i++){
-        for(j=1;j<n+1;j++){
-            if(X[i-1]==Y[j-1]){
-                dp[i][j] = dp[i-1][j-1] + 1;
-            }else if(dp[i][j-1]>dp[i-1][j]){
-                dp[i][j] = dp[i][j-1];
-            }else{
-                dp[i][j] = dp[i-1][j];
-            }
-            maxl = max(maxl, dp[i][j]);
-
-        }
-    }
-
-    return maxl;
-}
+static const int N = 100;
+int M[N][N], P[N+1];
 
 
 int main(){
     string X, Y;
-    int i, q;
-    cin >> q;
-    for(i=0;i<q;i++){
-        cin >> X >> Y;
-        cout << lcs(X, Y) <<endl;
+    int i,j,k,l,n;
+    cin >> n;
+    for(i=0;i<n;i++){
+        cin >> P[i] >> P[i+1];
+        // cout <<"i="<<i<<" "<< P[i] << " " <<P[i+1]<<endl;
+        M[i][i] = 0;
     }
+
+    for(j=1;j<n;j++){
+        for(i=0;i<n-j;i++){
+            k = i + j;
+            M[i][k] = (1<<21);
+            for(l=i;l<k;l++){
+                M[i][k] = min(M[i][k], M[i][l]+M[l+1][k]+P[i]*P[l+1]*P[k+1]);
+            }
+        }
+    }
+    cout << M[0][n-1] <<endl;
     return 0;
 }
