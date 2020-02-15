@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<iostream>
-#include<stack>
+#include<queue>
 using namespace std;
 #define N 100
 #define WHITE 0
@@ -8,39 +8,33 @@ using namespace std;
 #define BLACK 2
 
 int n, M[N][N];
+int INFTY = (1<<21);
 int color[N], d[N], f[N], tt;
 
-int next(int u){
-    for(int i=0;i<n;i++){
-        if(color[i]==WHITE && M[u-1][i]){
-            return i+1;
+void bfs(int s){
+    int i, u, v;
+    queue<int> Q;
+    Q.push(s);
+    color[s-1] = GRAY;
+    for(i=0;i<n;i++){
+        d[i] = INFTY;
+    }
+    d[s-1] = 0;
+    while(!Q.empty()){
+        u = Q.front();Q.pop();
+        for(v=0;v<n;v++){
+            if(M[u-1][v]==0){
+                continue;
+            }
+            if(color[v]==WHITE){
+                Q.push(v+1);
+                d[v] = d[u-1] + 1;
+                color[v] = GRAY;
+            }
         }
     }
-    return -1;
-
 }
 
-void dfs(int u){
-    int v,w;
-    stack<int> S;
-    S.push(u);
-    while (!S.empty()){
-        v = S.top();
-        color[u-1] = GRAY;
-        d[u-1] = ++tt;
-        w = next(u);
-        if(w==-1){
-            S.pop();
-            color[u-1] = BLACK;
-            f[u-1] = ++tt;
-        }else{
-            S.push(w);
-            color[w-1] = GRAY;
-            d[u-1] = ++tt;
-        }
-    }
-    
-}
 
 int main(){
     int i,j,u,v,k;
@@ -67,18 +61,21 @@ int main(){
     //     }
     //     cout << M[i][j] << "\n";
     // }
+    bfs(1);
 
-    for(i=1;i<n+1;i++){
-        if(color[i-1]==WHITE){
-            dfs(i);
-        }
-    }
 
+
+    int dist;
     for(i=0;i<n;i++){
-        printf("%d %d %d\n", i+1,d[i],f[i]);
+        if(d[i]==INFTY){
+            dist = -1;
+        }else{
+            dist = d[i];
+        }
+        printf("%d %d\n", i+1,dist);
     }
 
 
-
+    return 0;
 
 }

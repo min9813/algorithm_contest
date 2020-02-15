@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<iostream>
-#include<stack>
 using namespace std;
 #define N 100
 #define WHITE 0
@@ -10,36 +9,17 @@ using namespace std;
 int n, M[N][N];
 int color[N], d[N], f[N], tt;
 
-int next(int u){
-    for(int i=0;i<n;i++){
-        if(color[i]==WHITE && M[u-1][i]){
-            return i+1;
-        }
-    }
-    return -1;
-
-}
-
 void dfs(int u){
-    int v,w;
-    stack<int> S;
-    S.push(u);
-    while (!S.empty()){
-        v = S.top();
-        color[u-1] = GRAY;
-        d[u-1] = ++tt;
-        w = next(u);
-        if(w==-1){
-            S.pop();
-            color[u-1] = BLACK;
-            f[u-1] = ++tt;
-        }else{
-            S.push(w);
-            color[w-1] = GRAY;
-            d[u-1] = ++tt;
+    color[u-1] = GRAY;
+    d[u-1] = ++tt;
+    int i;
+    for(i=0;i<n;i++){
+        if((M[u-1][i]) && (color[i]==WHITE)){
+            dfs(i+1);
         }
     }
-    
+    f[u-1] = ++tt;
+    color[u-1] = BLACK;
 }
 
 int main(){

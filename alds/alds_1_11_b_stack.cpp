@@ -20,25 +20,30 @@ int next(int u){
 
 }
 
-void dfs(int u){
-    int v,w;
+void dfs(){
+    int v,w,i;
     stack<int> S;
-    S.push(u);
-    while (!S.empty()){
-        v = S.top();
-        color[u-1] = GRAY;
-        d[u-1] = ++tt;
-        w = next(u);
-        if(w==-1){
-            S.pop();
-            color[u-1] = BLACK;
-            f[u-1] = ++tt;
-        }else{
-            S.push(w);
-            color[w-1] = GRAY;
-            d[u-1] = ++tt;
+    for(i=1;i<n+1;i++){
+        if(color[i-1]==WHITE){
+            S.push(i);
+            color[i-1] = GRAY;
+            d[i-1] = ++tt;
+            while (!S.empty()){
+                v = S.top();
+                w = next(v);
+                if(w==-1){
+                    S.pop();
+                    color[v-1] = BLACK;
+                    f[v-1] = ++tt;
+                }else{
+                    S.push(w);
+                    color[w-1] = GRAY;
+                    d[w-1] = ++tt;
+                }
+            }
         }
     }
+
     
 }
 
@@ -67,12 +72,9 @@ int main(){
     //     }
     //     cout << M[i][j] << "\n";
     // }
+    dfs();
 
-    for(i=1;i<n+1;i++){
-        if(color[i-1]==WHITE){
-            dfs(i);
-        }
-    }
+
 
     for(i=0;i<n;i++){
         printf("%d %d %d\n", i+1,d[i],f[i]);
