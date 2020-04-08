@@ -1,6 +1,8 @@
 #include <cmath>
 #include <cstdio>
 #include <vector>
+#include <iostream>
+#include <iomanip>
 #define EPS (1e-10)
 #define equals(a,b) (fabs((a)-(b)) < EPS )
 
@@ -73,22 +75,27 @@ bool is_parallel(Point a1, Point a2, Point b1, Point b2){
 
 Point project(Segment s, Point p){
     Vector base = s.p2 - s.p1;
-    double r = dot(base, p) / base.norm();
+    // printf("%lf x=%lf, y=%lf", base.norm(), base.x, base.y);
+    double r = dot(base, p - s.p1) / base.norm();
     return s.p1 + base * r;
 }
 
+Point reflect(Segment s, Point p){
+    Vector base = s.p2 - s.p1;
+    return s.p1 + (project(s,p) - p) * 2.0;
+}
+
 int main(){
-    int n, i, x1,y1,x2,y2,x3,y3,x4,y4, out;
+    int n, i, x1,y1,x2,y2,a,b;
+    scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+    Segment l(Point(x1,y1), Point(x2,y2));
     scanf("%d", &n);
     for(i=0;i<n;i++){
-        scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
-        Point p1(x1,y1);
-        Point p2(x2,y2);
-        Point p3(x3,y3);
-        Point p4(x4,y4);
-        out = 2 * (int)is_parallel(p1,p2,p3,p4) + (int) is_orthogonal(p1,p2,p3,p4);
+        scanf("%d %d", &a, &b);
+        Point p(a,b);
 
-        printf("%d\n", out);
+        Point x = project(l, p);
+        std::cout << std::fixed << std::setprecision(10) << x.x << " "<<x.y <<"\n";
     }
 
     return 0;

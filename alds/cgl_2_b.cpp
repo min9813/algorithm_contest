@@ -1,8 +1,16 @@
 #include <cmath>
 #include <cstdio>
 #include <vector>
+#include <iostream>
+#include <iomanip>
 #define EPS (1e-10)
 #define equals(a,b) (fabs((a)-(b)) < EPS )
+
+static const int COUNTER_CLOCKWISE = 1;
+static const int CLOCKWISE = -1;
+static const int ONLINE_BACK = 2;
+static const int ONLINE_FRONT = -2;
+static const int ON_SEGMENT = 0;
 
 class Point{
     public:
@@ -46,6 +54,8 @@ class Circle{
 };
 
 typedef std::vector<Point> Polygon;
+bool intersection(Segment s1, Segment s2);
+bool intersection(Point p1, Point p2, Point p3, Point p4);
 
 double dot(Vector v1, Vector v2){
     return v1.x * v2.x + v1.y * v2.y;
@@ -73,9 +83,54 @@ bool is_parallel(Point a1, Point a2, Point b1, Point b2){
 
 Point project(Segment s, Point p){
     Vector base = s.p2 - s.p1;
-    double r = dot(base, p) / base.norm();
+    // printf("%lf x=%lf, y=%lf", base.norm(), base.x, base.y);
+    double r = dot(base, p - s.p1) / base.norm();
     return s.p1 + base * r;
 }
+
+Point reflect(Segment s, Point p){
+    Vector base = s.p2 - s.p1;
+    return p + (project(s,p) - p) * 2.0;
+}
+
+double getDistance(Point a, Point b){
+    return (b-a).abs();
+}
+
+double getDistanceLP(Line l, Point p){
+    return abs(cross(p-l.p1, l.p2 - l.p1)/(l.p2 - l.p1).abs());
+}
+
+double getDistanceSP(Segment s, Point p){
+    if(dot(s.p2 - s.p1, p - s.p1)<0.0) return (p-s.p1).abs();
+    if(dot(s.p1 - s.p2, p - s.p2)<0.0) return (p-s.p2).abs();
+    return getDistanceLP(s, p);
+}
+
+double getDistance(Segment s1, Segment s2){
+    if(intersection(s1, s2)) return 0.0;
+    return fmin(fmin(getDistanceSP(s1, s2.p1), getDistanceSP(s1, s2.p2)), 
+            fmin(getDistanceSP(s2, s1.p1), getDistanceSP(s2, s1.p2)));
+}
+
+int ccw(Point p0, Point p1, Point p2){
+    Vector a = p1 - p0;
+    Vector b = p2 - p0;
+    if(cross(a,b)>EPS) return COUNTER_CLOCKWISE;
+    if(cross(a,b)< -EPS) return CLOCKWISE;
+    if(dot(a,b)< -EPS) return ONLINE_BACK;
+    if(a.norm() < b.norm()) return ONLINE_FRONT;
+    return ON_SEGMENT;
+}
+
+bool intersection(Point p1, Point p2, Point p3, Point p4){
+    return (ccw(p1, p2, p3) * ccw(p1,p2,p4)<=0) && (ccw(p3,p4,p1) * ccw(p3,p4,p2)<=0);
+}
+
+bool intersection(Segment s1, Segment s2){
+    return intersection(s1.p1, s1.p2, s2.p1, s2.p2);
+}
+
 
 int main(){
     int n, i, x1,y1,x2,y2,x3,y3,x4,y4, out;
@@ -86,7 +141,7 @@ int main(){
         Point p2(x2,y2);
         Point p3(x3,y3);
         Point p4(x4,y4);
-        out = 2 * (int)is_parallel(p1,p2,p3,p4) + (int) is_orthogonal(p1,p2,p3,p4);
+        out = (int)intersection(p1,p2,p3,p4);
 
         printf("%d\n", out);
     }
