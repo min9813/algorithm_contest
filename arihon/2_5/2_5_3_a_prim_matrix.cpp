@@ -10,7 +10,7 @@
 // #include <prettyprint.hpp>
 using namespace std;
 typedef long long llong;
-static const int max_n = 100010;
+static const int max_n = 10010;
 // static const int max_e = 2010;
 static const llong max_cost = 2000000000000000;
 static const string negative_cicle = "NEGATIVE CIRCLE";
@@ -64,7 +64,7 @@ int main(){
         adj_matrix[v][u] = cost;
     }
 
-    printf("ok1\n");
+    // printf("ok1\n");
     ans = prim(adj_matrix, 0, N);
 
     printf("%lld\n", ans);
