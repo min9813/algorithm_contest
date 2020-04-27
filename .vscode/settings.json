@@ -26,6 +26,7 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "valarray": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "numeric": "cpp"
     }
 }
