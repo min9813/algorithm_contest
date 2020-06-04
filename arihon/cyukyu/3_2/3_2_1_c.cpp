@@ -21,53 +21,39 @@ static const ll mod = 2019;
 static const ll max_value = 100000000000100;
 // vector<vector<vector<ll>>> dp(max_n, vector<vector<ll>>(max_n, vector<ll>(max_n*max_n, 0)));
 // static const ll max_x = max_value * max_value;
-vector<ll> S(max_n);
+vector<ll> A(max_n);
 // vector<ll> cards(max_n);
 // vector<ll> S(max_n);
 // vector<pair<ll, ll>> times_vec(max_n);
-ll N, M;
+// ll N, M;
 
 
 void Main(){
     // bool is_ok = true;
     // printf("------------- V=%lld---------\n", V);
-    ll N, K, a;
+    ll N, a;
     sll(N);
-    sll(K);
-    bool has_zero = false;
+    // sll(K);
+    // bool has_zero = false;
     rep(i,N){
         sll(a);
-        S[i] = a;
-        has_zero = (a == 0) || has_zero;
+        A[i] = a;
+        // has_zero = (a == 0) || has_zero;
     }
-
-    if(has_zero){
-        printf("%lld\n", N);
-    }else{
-        ll length = 0;
-        ll temp = 0;
-        ll now_prod = 1;
-        ll j = 0;
-        rep(i,N){
-            now_prod *= S[i];
-            // printf("now prod=%lld, S[%lld]=%lld, j =%lld\n", now_prod, i, S[i], j);
-            if(now_prod > K){
-                // printf("max length = %lld, now length = %lld\n", length, i - j);
-                length = max(temp, length);
-                // temp_length = 0;
-                // temp = 0;
-                while(now_prod>K && j<=i){
-                    now_prod /= S[j];
-                    j ++;
-                }
-                temp = i - j + 1;
-            }else{
-                temp = i - j + 1;
-            }
+    ll num = 0;;
+    ll temp = 0;
+    // ll now_prod = 1;
+    ll j = 0;
+    for(ll i=1;i<N;i++){
+        // printf("i=%lld, j=%lld, A[%lld]=%lld, num=%lld\n", i, j, i, A[i], num);
+        if(A[i]>A[i-1]){
+            num += (i-j);
+        }else{
+            j = i;
         }
-        length = max(length, temp);
-        printf("%lld\n", length);
     }
+    // length = max(length, temp);
+    printf("%lld\n", num+N);
 
 }
 

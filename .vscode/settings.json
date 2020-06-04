@@ -27,6 +27,8 @@
         "unordered_set": "cpp",
         "valarray": "cpp",
         "*.tcc": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "chrono": "cpp",
+        "ostream": "cpp"
     }
 }

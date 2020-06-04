@@ -3,3 +3,6 @@ main
 .vscode
 *.json
 .vscode/*
+*.ipynb
+*ipynb_checkpoint
+temp*
