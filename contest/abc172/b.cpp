@@ -28,16 +28,23 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
-
-
+vector<vector<ll>> field(3, vector<ll>(3, 0));
+vector<ll> coord1 = {0, 4, 8};
+vector<ll> coord2 = {2, 4, 6};
 void Main(){
+    string S, T;
+    cin >> S;
+    cin >> T;
+    ll N = S.size();
+    ll ans = 0;
+    rep(i, N){
+        ans += (ll)(S[i] != T[i]);
+    }
+
+    cout << ans <<endl;
 
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

@@ -32,49 +32,14 @@ vector<vector<ll>> field(3, vector<ll>(3, 0));
 vector<ll> coord1 = {0, 4, 8};
 vector<ll> coord2 = {2, 4, 6};
 void Main(){
-    ll a;
-    rep(i, 3){
-        rep(j, 3){
-            sll(a);
-            field[i][j] = a;
-        }
+    ll n, K;
+    cin >> n >> K;
+    ll ans = 0;
+    while(n>0){
+        n /= K;
+        ++ ans;
     }
-    ll N;
-    sll(N);
-    set<ll> numbers;
-    rep(i, N){
-        sll(a);
-        numbers.insert(a);
-    }
-    bool is_ok = false;
-    rep(i, 3){
-        bool ris_ok = true;
-        bool cis_ok = true;
-        rep(j, 3){
-            ris_ok = ris_ok && (numbers.find(field[i][j]) != numbers.end());
-            cis_ok = cis_ok && (numbers.find(field[j][i]) != numbers.end());
-        }
-        is_ok = is_ok || ris_ok;
-        is_ok = is_ok || cis_ok;
-    }
-
-    bool e_is_ok = true;
-    for(auto c:coord1){
-        e_is_ok = e_is_ok && (numbers.find(field[c/3][c%3]) != numbers.end());
-    }
-
-    bool f_is_ok = true;
-    for(auto c:coord2){
-        f_is_ok = f_is_ok && (numbers.find(field[c/3][c%3]) != numbers.end());
-    }
-
-    is_ok = is_ok || (e_is_ok) || (f_is_ok);
-    if(is_ok){
-        cout << "Yes" <<endl;
-    }else{
-        cout << "No" <<endl;
-    }
-
+    cout << ans <<endl;
 
 }
 

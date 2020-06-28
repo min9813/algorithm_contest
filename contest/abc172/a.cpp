@@ -29,15 +29,13 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
+    ll a;
+    sll(a);
+    cout << a + a*a + a*a*a<<endl;
 
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

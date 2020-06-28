@@ -29,7 +29,7 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
-// typedef long long ll;
+typedef long long ll;
 const int mod = 1000000007;
 // const int mod = 998244353;
 struct mint {
@@ -76,38 +76,36 @@ struct combination {
     if (k < 0 || k > n) return 0;
     return fact[n]*ifact[k]*ifact[n-k];
   }
+
+  mint permutation(ll n, ll k){
+      if(k<0 || k>n) return 0;
+      return fact[n] * ifact[n-k];
+  }
 };
 
 
+
 void Main(){
-    ll N, A, B;
-    cin >> N >> A >> B;
-    mint n = N;
-    mint a = A;
-    mint b = B;
-    mint total = 2;
-    total = total.pow(N);
-    mint comb_na = 1;
-    mint comb_na_denom = 1;
-    mint comb_nb = 1;
-    mint comb_nb_denom = 1;
-
-    for(ll i=0;i<A;i++){
-        comb_na *= n-i;
-        comb_na_denom *= (i+1);
+    ll N, M;
+    sll(N);
+    sll(M);
+    combination comb(M);
+    mint a_num = comb.permutation(M, N);
+    mint ks = 0;
+    ll coef = 1;
+    for(ll i=0;i<=N;++i){
+        ks += comb(N, i) * comb.permutation(M-i, N-i) * coef;
+        coef = coef - (coef * 2);
+        // printf("i=%lld, %lldP%lld=%lld, k=%lld\n", i, M-i, N-i, comb.permutation(M-i, N-i), ks.x);
     }
-    comb_na /= comb_na_denom;
-    for(ll i=0;i<B;i++){
-        comb_nb *= n-i;
-        comb_nb_denom *= (i+1);
-    }
-    comb_nb /= comb_nb_denom;
-    cout << total - comb_na - comb_nb - 1 <<endl;
 
-    
-
+    cout << ks * a_num<< endl;
 }
 
 int main(){
     Main();
+    // string S = "ksdfjl";
+    // char v = S[3];
+    // S[3] = 'a';
+    // cout << S <<endl;
 }

@@ -30,25 +30,39 @@ typedef short int si;
 
 
 void Main(){
-    ll N, a;
-    sll(N);
-    vector<ll> xs(N,0);
+    string S;
+    cin >> S;
+    ll N = S.size();
+    vector<vector<ll>> dp(N+1, vector<ll>(2,0));
+    dp[0][0] = 1;
+    // dp[1][1] = 1;
     rep(i, N){
-        sll(a);
-        xs[i] = a;
-    }
+        rep(j, 2){
 
-    sort(xs.begin(), xs.end());
-    ll ans = 100000000000000;
-    rep(i, 101){
-        ll dist = 0;
-        rep(j, N){
-            dist += (i-xs[j]) * (i-xs[j]);
+            ll max_d;
+            if(j==0){
+                max_d = S[i] - '0';
+            }else{
+                // if(i==0){
+                //     continue;
+                // }
+                max_d = 9;
+            }
+            printf("i=%lld, j=%lld, max_d=%lld\n", i, j, max_d);
+            for(ll d=0;d<=max_d;d++){
+                dp[i+1][j||d<S[i]-'0'] += dp[i][j];
+            }
         }
-        ans = min(ans, dist);
+
+    }
+    rep(i, N+1){
+        rep(j, 2){
+            printf("dp[%lld][%lld]=%lld\n", i, j, dp[i][j]);
+        }
     }
 
-    cout << ans <<endl;
+    cout << dp[N][1] + dp[N][0] <<endl;
+
 
 }
 
