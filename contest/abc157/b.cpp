@@ -32,14 +32,47 @@ vector<vector<ll>> field(3, vector<ll>(3, 0));
 vector<ll> coord1 = {0, 4, 8};
 vector<ll> coord2 = {2, 4, 6};
 void Main(){
-    ll n, K;
-    cin >> n >> K;
-    ll ans = 0;
-    while(n>0){
-        n /= K;
-        ++ ans;
+    rep(i, 3){
+        rep(j, 3){
+            sll(field[i][j]);
+        }
     }
-    cout << ans <<endl;
+    ll N, b;
+    cin >> N;
+    set<ll> ps;
+    rep(i, N){
+        sll(b);
+        rep(i, 3){
+            rep(j, 3){
+                if(field[i][j] == b){
+                    ps.insert(i*3+j);
+                    break;
+                }
+            }
+        }
+    }
+
+    bool is_ok = false;
+    bool naname1_ok = true;
+    bool naname2_ok = true;
+    rep(i, 3){
+        bool this_ok = true;
+        bool tate_ok = true;
+        rep(j, 3){
+            this_ok = this_ok && ps.find(i*3+j) != ps.end();
+            tate_ok = tate_ok && ps.find(j*3+i) != ps.end();
+        }
+        is_ok = is_ok || this_ok;
+        is_ok = is_ok || tate_ok;
+        naname1_ok = naname1_ok && ps.find(coord1[i]) != ps.end();
+        naname2_ok = naname2_ok && ps.find(coord2[i]) != ps.end();
+    }
+    if(is_ok || naname1_ok || naname2_ok){
+        cout << "Yes" <<endl;
+    }else{
+        cout << "No" <<endl;
+    }
+    
 
 }
 

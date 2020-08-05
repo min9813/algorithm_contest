@@ -30,21 +30,36 @@ typedef short int si;
 
 
 
+
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll N, D, A, x, h;
+    cin >> N >> D >> A;
+    vector<ll> xs(N);
+    map<ll,ll> xhs;
+    rep(i, N){
+        sll(x);
+        sll(h);
+        xs[i] = x;
+        xhs[x] = h;
     }
+
+    sort(xs.begin(), xs.end());
+    vector<ll> imos(N);
+
+    ll now_num = 0, left_h, this_n;
+    ll ans = 0;
+    rep(i, N){
+        x = xs[i];
+        now_num += imos[i];
+        h = xhs[x];
+        left_h = (h - 1) / A + 1;
+        this_n = left_h / A;
+        imos[i] = this_n;
+        ans += this_n;
+    }
+    cout << ans <<endl;
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

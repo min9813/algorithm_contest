@@ -29,22 +29,27 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
+    ll A,B,C;
+    cin >> A >> B >> C;
+    string out1 = "Yes";
+    string out2 = "No";
+    if(A==B && C != B){
+        cout << out1 << endl;
+    }else if(A==C && B != A){
+        cout << out1 << endl;
+
+    }else if(B==C && A != B){
+        cout << out1 << endl;
+
     }else{
-        cout << R + 100 * (10 - N) <<endl;
+        cout << out2 << endl;
+
     }
+
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

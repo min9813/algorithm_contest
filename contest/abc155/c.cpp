@@ -29,22 +29,31 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
+    ll N;
+    string s;
+    map<string, ll> counter;
+    map<ll, set<string>> inv_counter;
+    // set<ll, vector<ll>, greater<ll>> nums; 
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+
+    rep(i, N){
+        cin >> s;
+        counter[s]++;
     }
+
+    ll max_num = -1;
+    for(auto &p:counter){
+        max_num = max(max_num, p.second);
+        inv_counter[p.second].insert(p.first);
+    }
+
+    for(auto &ss: inv_counter[max_num]){
+        cout << ss <<endl;
+    }
+    
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

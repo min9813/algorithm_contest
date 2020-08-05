@@ -29,22 +29,23 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
+    ll N, K;
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    sll(K);
+    vector<ll> hs(N);
+    rep(i, N){
+        sll(hs[i]);
     }
+    sort(hs.begin(), hs.end());
+    ll s = 0;
+    rep(i, N-K){
+        s += hs[i];
+    }
+
+    cout << s <<endl;
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

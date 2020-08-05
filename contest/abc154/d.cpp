@@ -29,22 +29,36 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
+    ll N, K;
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    sll(K);
+    vector<ll> ps(N);
+    vector<ll> exp_double(N);
+    vector<ll> exp_acm(N+1, 0);
+    rep(i, N){
+        sll(ps[i]);
+        exp_double[i] = ps[i] + 1;
+        exp_acm[i+1] = exp_acm[i] + exp_double[i];
     }
+
+    ll max_e = 0;
+    ll max_i = -1;
+    for(ll i=K-1;i<N;i++){
+        ll this_exp = exp_acm[i+1] - exp_acm[i+1-K];
+        if(this_exp > max_e){
+            max_i = i;
+            max_e = this_exp;
+        }
+    }
+
+    double ans = (double)max_e * 0.5;
+
+    cout << fixed << setprecision(10) << ans << endl;
+
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

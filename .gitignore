@@ -6,3 +6,4 @@ main
 *.ipynb
 *ipynb_checkpoint
 temp*
+!template

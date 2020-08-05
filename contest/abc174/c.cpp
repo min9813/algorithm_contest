@@ -29,22 +29,28 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll K;
+    sll(K);
+    ll now_mod = 7 % K;
+    ll base10_mod = 1;
+    ll n = 1;
+    bool is_found = false;
+    while(now_mod != 0 && n < K*2){
+        base10_mod *= 10;
+        base10_mod %= K;
+        now_mod += (base10_mod * 7);
+        now_mod %= K;
+        ++ n;
     }
+    if(now_mod != 0){
+        n = -1;
+    }
+
+    cout << n <<endl;
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

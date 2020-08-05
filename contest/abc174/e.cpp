@@ -28,23 +28,46 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
+static const ll max_v = 1e15;
+vector<ll> as;
+ll K, N;
+
+bool is_ok(ll value){
+    ll cut_n = 0;
+    rep(i, N){
+        cut_n += (as[i] - 1)/ value;
+        if(cut_n > K){
+            return false;
+        }
+    }
+
+    return true;
+}
 
 
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    cin >> N >> K;
+    as.resize(N);
+    rep(i, N){
+        sll(as[i]);
     }
+
+    ll left_v = 0;
+    ll right_v = 1e9;
+    while(right_v - left_v>1){
+        ll mid = (right_v + left_v) / 2;
+        // cout << "mid=" << mid <<endl;
+        bool ok = is_ok(mid);
+        if(ok){
+            right_v = mid;
+        }else{
+            left_v = mid;
+        }
+    }
+
+    cout << right_v <<endl;
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

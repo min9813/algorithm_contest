@@ -29,22 +29,38 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll A, B;
+    string S, T, u;
+    cin >> S >> T;
+    cin >> A >> B;
+    cin >> u;
+
+    bool is_s_ = true;
+    bool is_t_ = true;
+    rep(i, 10){
+        if(i>=u.size()){
+            if(u.size() == T.size()){
+                is_s_ = false;
+            }else{
+                is_t_ = false;
+            }
+        }
+        if(i>=T.size()){ is_t_ = false;break;}
+        if(u[i] != T[i]) {is_t_ = false; break;}
+        if(i>=S.size()){ is_s_ = false; break;}
+        if(u[i] != S[i]) {is_s_ = false; break;}
     }
+
+    if(is_s_){
+        cout << A - 1 <<" " << B << endl;
+    }else{
+        cout << A <<" " << B -1<< endl;
+
+    }
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

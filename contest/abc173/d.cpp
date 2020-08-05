@@ -29,22 +29,35 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
+    ll N;
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    vector<ll> as(N,0);
+    priority_queue<pll, vector<pll>> pq;
+    rep(i, N){
+        sll(as[i]);
+        pq.push(make_pair(as[i], 2));
     }
+
+    auto top = pq.top();pq.pop();
+    // cout << top.first <<endl;
+    top.second = 1;
+    pq.push(top);
+    ll ans = 0;
+    rep(i, N-1){
+        auto top = pq.top();pq.pop();
+        -- top.second;
+        ans += top.first;
+        if(top.second>0){
+            pq.push(top);
+        }
+    }
+
+    cout << ans <<endl;
+
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

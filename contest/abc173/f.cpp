@@ -31,14 +31,19 @@ typedef short int si;
 
 
 void Main(){
-    ll N, R;
+    ll N, V, E, u, v;
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    V = 0, E=0;
+    for(ll i=1;i<=N;i++) V += (i * (N-i+1));
+
+    rep(i, N-1){
+        sll(u);
+        sll(v);
+        if(u>v) swap(u, v);
+        E += u * (N-v+1);
     }
+
+    cout << V - E <<endl;
 }
 
 int main(){

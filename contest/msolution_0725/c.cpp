@@ -27,24 +27,30 @@ using namespace std;
 typedef long long ll;
 typedef double lf;
 typedef short int si;
-
-
+ll max_n = 1000000000000000;
 
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll N, K;
+    cin >> N >> K;
+    vector<ll> as(N);
+    ll s = 1, prev_s = 1;
+
+    rep(i, N){
+        sll(as[i]);
+        // s *= as[i];
+        if(i>=K){
+            // if(s%as[i-K] != 0)exit(0);
+            if(as[i]>as[i-K]){
+                cout << "Yes" <<endl;
+            }else{
+                cout << "No" <<endl;
+
+            }
+        }
+        // prev_s = s;
     }
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

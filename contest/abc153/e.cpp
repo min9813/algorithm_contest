@@ -28,23 +28,43 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
+static const ll max_v = 1e15;
+
 
 
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll H, N, a, b;
+    cin >> H >> N;
+    vector<ll> as(N);
+    vector<ll> bs(N);
+    ll max_a = H;
+    rep(i, N){
+        sll(as[i]);
+        sll(bs[i]);
+        max_a = max(max_a, as[i]);
     }
+
+
+    vector<ll> dp(2*max_a+10, max_v);
+    dp[0] = 0;
+    rep(i, 2*max_a+1){
+        rep(j, N){
+            if(i>=as[j]){
+                dp[i] = min(dp[i-as[j]]+bs[j], dp[i]);
+            }
+        }
+    }
+
+    ll ans = max_v;
+    for(ll i=H;i<=2*max_a;i++){
+        ans = min(dp[i], ans);
+    }
+
+    cout << ans <<endl;
+
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

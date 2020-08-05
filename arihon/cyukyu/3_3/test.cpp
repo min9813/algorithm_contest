@@ -13,6 +13,7 @@
 #include <random>
 #include <bitset>
 #include <list>
+#include <assert.h>
 // #include <prettyprint.hpp>
 using namespace std;
 #define repi(i,n) for(int i=0;i<n;++i)
@@ -29,22 +30,24 @@ typedef double lf;
 typedef short int si;
 
 
-
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
-    }
+    
+
 }
 
 int main(){
-    Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
+    // Main();
+    string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    ll n = 26;
+    map<ll, char> con;
+    rep(i, n){
+        con[i] = alphabets[i];
+    }
+    vector<vector<ll>> as = {{4, 5, 3, 9, 16, 8, 5, 18, 9, 14, 7, 9, 20, 23, 1, 19, 3, 15, 16, 12, 5, 20, 5 , 12, 25, 13, 5, 1, 14, 9, 14, 7, 12, 5, 19, 19}};
+    rep(i, as.size()){
+        for(auto j: as[i]){
+            cout << con[(j-1-13) % alphabets.size()];
+        }
+        cout << endl;
+    }
 }

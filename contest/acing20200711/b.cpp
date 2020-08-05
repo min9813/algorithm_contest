@@ -28,23 +28,22 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
-
-
+vector<vector<ll>> field(3, vector<ll>(3, 0));
+vector<ll> coord1 = {0, 4, 8};
+vector<ll> coord2 = {2, 4, 6};
 void Main(){
-    ll N, R;
-    sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll N, a;
+    cin >> N;
+    ll ans = 0;
+    rep(i, N){
+        cin >> a;
+        ans += ((i+1) % 2==1) && (a%2==1);
     }
+
+    cout << ans << endl;
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }

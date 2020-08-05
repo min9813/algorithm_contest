@@ -31,6 +31,46 @@ typedef short int si;
 
 
 void Main(){
+    ll N, Q, i, l, r;
+    char c;
+    string S;
+    vector<set<ll>> cs(26);
+    cin >> N;
+    cin >> S;
+    cin >> Q;
+    rep(i, N){
+        cs[S[i]-'a'].insert(i);
+    }
+    rep(j, Q){
+        sll(i);
+        if(i==1){
+            sll(l);
+            cin >> c;
+            -- l;
+            cs[S[l]-'a'].erase(l);
+            cs[c-'a'].insert(l);
+            S[l] = c;
+        }else
+        {
+            sll(l);
+            sll(r);
+            -- l;
+            ll num = 0;
+            rep(k, 26){
+                auto st_iter = cs[k].lower_bound(l);
+                if(st_iter != cs[k].end() && *st_iter<r){
+                    ++ num;
+                }
+
+                // auto end_iter = upper_bound(p.second.begin(), p.second.end(), r);
+
+                // cout << "i=" << i << " l=" << l << " r=" << r << " end_it,st_it=" << *end_iter<<"," << *st_iter<<endl;
+            }
+            printf("%lld\n", num);
+        }
+        
+    }
+
 
 }
 

@@ -28,23 +28,26 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
-
-
 void Main(){
-    ll N, R;
+    ll H, N, a;
+    sll(H);
     sll(N);
-    sll(R);
-    if(N>=10){
-        cout << R <<endl;
-    }else{
-        cout << R + 100 * (10 - N) <<endl;
+    ll s = 0;
+    rep(i, N){
+        sll(a);
+        s += a;
     }
+
+    if(s>=H){
+        cout << "Yes" <<endl;
+    }else{
+        cout << "No" <<endl;
+
+    }
+
+
 }
 
 int main(){
     Main();
-    // string S = "ksdfjl";
-    // char v = S[3];
-    // S[3] = 'a';
-    // cout << S <<endl;
 }
