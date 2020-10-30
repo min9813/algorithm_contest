@@ -30,30 +30,31 @@ typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
+    ll N;
+    cin >> N ;
+    vector<ll> ps(N, 0);
+    vector<ll> all_ans(N, 0);
+    rep(i, N){
+        cin >> ps[i];
+    }
 
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
+    ll ans = 0;
+    set<ll> founds;
+    rep(i, N){
+        founds.insert(ps[i]);
+        if(ps[i] != ans){
+            all_ans[i] = ans;
         }else{
-            not_found = true;
+            while(founds.find(ans) != founds.end()){
+                ++ ans;
+            }
+            all_ans[i] = ans;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+
     }
-
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
+    rep(i, N){
+        cout << all_ans[i] <<endl;
     }
-
-
 }
 
 int main(){

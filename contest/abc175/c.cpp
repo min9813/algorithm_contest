@@ -30,30 +30,20 @@ typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
-        }
-        V = (V * 10 + 7) % K;
-        ++idx;
-    }
-
-    if(not_found){
-        cout << "-1" <<endl;
+    ll X, K, D;
+    cin >> X >> K >> D;
+    X = abs(X);
+    ll num_0 = X / D;
+    if(num_0>K){
+        cout << X - K * D <<endl;
     }else{
-        cout << idx <<endl;
+        ll left_k = K - num_0;
+        if(left_k%2){
+            cout << abs((X % D) - D) <<endl;
+        }else{
+            cout << X % D <<endl;
+        }
     }
-
-
 }
 
 int main(){

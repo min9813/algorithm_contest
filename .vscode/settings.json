@@ -63,5 +63,9 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "python.pythonPath": "/Users/min9813/.pyenv/versions/distiller/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true
 }

@@ -30,30 +30,30 @@ typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
+    ll N;
+    string S;
+    sll(N);
+    cin >> S;
+    ll ans = 0;
+    ll now_right_r = N - 1;
+    ll now_left_w = 0;
+    for(;now_left_w<N;++now_left_w){
+        if(S[now_left_w]!='W'){
+            continue;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+        while(S[now_right_r]!='R' && now_right_r>now_left_w){
+            -- now_right_r;
+        }
+        if(now_right_r<=now_left_w){
+            break;
+        }
+        S[now_right_r] = 'W';
+        S[now_left_w] = 'R';
+        // cout << "add, now_left_w"
+        ++ ans;
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
-    }
-
-
+    cout << ans <<endl;
 }
 
 int main(){

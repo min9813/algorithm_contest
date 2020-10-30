@@ -13,6 +13,7 @@
 #include <random>
 #include <bitset>
 #include <list>
+#include <assert.h>
 // #include <prettyprint.hpp>
 using namespace std;
 #define repi(i,n) for(int i=0;i<n;++i)
@@ -24,37 +25,45 @@ using namespace std;
 #define pll pair<ll,ll>
 #define pii pair<int,int>
 #define psi pair<si,si>
+#define v(t) vector<t>
+#define vv(t) vector<vector<t>>
+#define vvv(t) vector<vector<vector<t>>>
 typedef long long ll;
 typedef double lf;
 typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
+    ll n, m, a;
+    v(ll) answers;
+    while(cin >> n >> m){
+        if(n==0) break;
+        v(ll) as(n);
+        rep(i, n){
+            cin >> a;
+            as[i] = a;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+
+        ll max_v = 0;
+        rep(i, n){
+            if(as[i] > m) continue; 
+            for(ll j=i+1;j<n;++j){
+                if(as[i] + as[j] <= m){
+                    max_v = max(max_v, as[i]+as[j]);
+                }
+            }
+        }
+        answers.push_back(max_v);
     }
-
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
+    rep(i, answers.size()){
+        if(answers[i] == 0){
+            cout << "NONE" << endl;
+        }else{
+            cout << answers[i] <<endl;
+        }
     }
-
-
 }
+
 
 int main(){
     Main();

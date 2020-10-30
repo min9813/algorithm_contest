@@ -30,30 +30,19 @@ typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
-        }
-        V = (V * 10 + 7) % K;
-        ++idx;
+    ll N, a;
+    sll(N);
+    // vector<ll> as(N, 0);
+    ll ans = 0;
+    ll prev_max = 0;
+    rep(i, N){
+        sll(a);
+        prev_max = max(a, prev_max);
+        ans += prev_max - a;
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
-    }
-
-
+    cout << ans <<endl;
+    
 }
 
 int main(){

@@ -13,6 +13,7 @@
 #include <random>
 #include <bitset>
 #include <list>
+#include <assert.h>
 // #include <prettyprint.hpp>
 using namespace std;
 #define repi(i,n) for(int i=0;i<n;++i)
@@ -24,36 +25,32 @@ using namespace std;
 #define pll pair<ll,ll>
 #define pii pair<int,int>
 #define psi pair<si,si>
+#define v(t) vector<t>
 typedef long long ll;
 typedef double lf;
 typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
+    ll n, a;
+    v(ll) answers;
+    while(cin >> n){
+        if(n==0) break;
+        v(ll) persons(n);
+        ll sum = 0;
+        rep(i, n){
+            cin >> a;
+            persons[i] = a * n;
+            sum += a;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+        sort(persons.begin(), persons.end());
+        ll ans = upper_bound(persons.begin(), persons.end(), sum) - persons.begin();
+        answers.emplace_back(ans);
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
+    rep(i, answers.size()){
+        cout << answers[i] <<endl;
     }
-
-
 }
 
 int main(){

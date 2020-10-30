@@ -13,6 +13,7 @@
 #include <random>
 #include <bitset>
 #include <list>
+#include <assert.h>
 // #include <prettyprint.hpp>
 using namespace std;
 #define repi(i,n) for(int i=0;i<n;++i)
@@ -30,29 +31,19 @@ typedef short int si;
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
+    ll a, b;
+    vector<ll> ans;
+    while(true){
+        cin >> a >> b;
+        if(a==0 && b == 0){
             break;
-        }else{
-            not_found = true;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+        ans.emplace_back(a*b);
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
+    rep(i, ans.size()){
+        cout << ans[i] <<endl;
     }
-
 
 }
 

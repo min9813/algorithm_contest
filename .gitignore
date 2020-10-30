@@ -7,3 +7,5 @@ main
 *ipynb_checkpoint
 temp*
 !template
+*in
+*out

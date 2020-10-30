@@ -28,31 +28,28 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
-
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
+    ll N, d1, d2;
+    cin >> N;
+    ll num_suc = 0;
+    bool is_ok = false;
+    rep(i, N){
+        cin >> d1 >> d2;
+        if(d1 == d2){
+            ++num_suc;
+            if(num_suc>=3){
+                is_ok = true;
+            }
         }else{
-            not_found = true;
+            num_suc = 0;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
+    if(is_ok){
+        cout << "Yes" <<endl;
     }else{
-        cout << idx <<endl;
+        cout << "No" <<endl;
     }
-
 
 }
 

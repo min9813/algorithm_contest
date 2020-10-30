@@ -28,31 +28,25 @@ typedef long long ll;
 typedef double lf;
 typedef short int si;
 
+static const ll INF = 1e15;
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
+    string S, T;
+    cin >> S >> T;
+    ll ans = INF;
+    for(ll i=0;i<S.size(); ++i){
+        ll this_num = 0;
+        if(i + T.size()>S.size()){
             break;
-        }else{
-            not_found = true;
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+        for(ll j=0;j<T.size();++j){
+            this_num += (T[j] == S[i+j]);
+        }
+        this_num = T.size() - this_num;
+        ans = min(this_num, ans);
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
-    }else{
-        cout << idx <<endl;
-    }
-
+    cout << ans <<endl;
 
 }
 

@@ -27,33 +27,48 @@ using namespace std;
 typedef long long ll;
 typedef double lf;
 typedef short int si;
+static const ll MAX_N = 100010;
+
+// bool field[MAX_N];
 
 
 void Main(){
-    ll K;
-    sll(K);
-    ll V = 7;
-    ll idx = 1;
-
-    bool not_found = false;
-    while(idx < 2*K){
-        if(V % K==0){
-            not_found = false;
-            break;
-        }else{
-            not_found = true;
+    ll N, M;
+    string S;
+    cin >> N >> M;
+    cin >> S;
+    ll size = S.size();
+    bool is_reach = false;
+    vector<ll> path;
+    for(ll i=N;i>=0;){
+        ll prev_i = i;
+        for(ll j=M;j>0;--j){
+            if((i-j)>=0 && S[i-j] == '0'){
+                i -= j;
+                path.emplace_back(j);
+                if(i==0){
+                    is_reach = true;
+                }
+                break;
+            }
         }
-        V = (V * 10 + 7) % K;
-        ++idx;
+        if(prev_i == i){
+            break;
+        }
+
     }
 
-    if(not_found){
-        cout << "-1" <<endl;
+    if(is_reach){
+        for(ll i=path.size()-1;i>=0;--i){
+            cout << path[i];
+            if(i!=0){
+                cout << " ";
+            }
+        }
+        cout << "\n";
     }else{
-        cout << idx <<endl;
+        cout << "-1" <<endl;
     }
-
-
 }
 
 int main(){
